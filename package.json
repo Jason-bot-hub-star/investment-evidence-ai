@@ -1,0 +1,12 @@
+{
+  "name": "investment-evidence-workspace",
+  "version": "2.1.0",
+  "private": true,
+  "scripts": {
+    "build": "node build.js",
+    "test": "node tests/engine.test.js && node tests/api.test.js"
+  },
+  "engines": {
+    "node": "22.x"
+  }
+}

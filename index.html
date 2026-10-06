@@ -1,0 +1,535 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="theme-color" content="#f6f6f8" />
+    <title>证据台 · 同花顺风格投研概念作品</title>
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' rx='10' fill='%23ef2135'/%3E%3Cpath d='M11 12h18v5H16v4h11v5H16v3h13v3H11z' fill='white'/%3E%3C/svg%3E"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="ths-theme.css" />
+  </head>
+  <body>
+    <a class="skip" href="#main">跳到主要内容</a>
+    <aside class="sidebar" id="sidebar">
+      <a class="brand" href="#" aria-label="证据台首页"
+        ><span class="brand-mark">证</span
+        ><span>证据台<small>AI INVESTMENT RESEARCH</small></span></a
+      >
+      <div class="workspace-label">同花顺风格概念作品 <span>非官方产品</span></div>
+      <nav aria-label="主要导航">
+        <button class="nav-item active" data-view="workbench">
+          <span class="nav-symbol">▦</span>验证工作台</button
+        ><button class="nav-item" data-view="lab">
+          <span class="nav-symbol">◇</span>情景实验<span class="nav-badge"
+            >模拟</span
+          ></button
+        ><button class="nav-item" data-view="tasks">
+          <span class="nav-symbol">▤</span>研究任务<span
+            id="taskCount"
+            class="count"
+            >0</span
+          >
+        </button>
+      </nav>
+      <div class="side-rule"></div>
+      <p class="side-heading">研究原则</p>
+      <div class="principle">
+        <span>01</span>
+        <p>结论不能比证据更确定</p>
+      </div>
+      <div class="principle">
+        <span>02</span>
+        <p>让反对证据也有位置</p>
+      </div>
+      <div class="principle">
+        <span>03</span>
+        <p>不知道，值得被记录</p>
+      </div>
+      <div class="side-bottom">
+        <div class="mini-avatar">研</div>
+        <div>独立研究者<small>仅使用公开资料与虚构情景</small></div>
+      </div>
+    </aside>
+    <div class="app-shell">
+      <header class="topbar">
+        <div class="breadcrumb">
+          <button
+            id="menuBtn"
+            class="icon-btn mobile-only"
+            aria-label="打开或关闭导航"
+          >
+            ☰</button
+          ><span>研究空间</span><span>/</span
+          ><strong id="viewTitle">验证工作台</strong>
+        </div>
+        <div class="top-actions">
+          <span id="connection" class="connection"
+            ><i></i>本地案例 · 无模型调用</span
+          ><button class="button small ghost" id="settingsBtn">接入设置</button>
+        </div>
+      </header>
+      <main id="main" tabindex="-1">
+        <section id="workspaceView">
+          <div class="page-heading">
+            <div>
+              <div class="eyebrow">AI RESEARCH · EVIDENCE FIRST</div>
+              <h1>让投资判断，有据可循</h1>
+              <p>从命题到证据，厘清每一个判断的边界。</p>
+            </div>
+            <button class="button ghost" id="guideBtn">
+              操作提示 <span>↗</span>
+            </button>
+          </div>
+          <div class="mode-banner" id="modeBanner">
+            <span class="banner-dot"></span>
+            <p>
+              <strong>历史材料案例</strong> ·
+              使用苹果官方财报摘录与本地规则；不是实时 AI 分析。
+            </p>
+            <button id="bannerSettings">接入真实 AI →</button>
+          </div>
+          <div class="workspace-grid">
+            <div class="left-column">
+              <section class="panel thesis-panel">
+                <div class="panel-heading">
+                  <h2>研究命题</h2>
+                  <span class="subtle-tag" id="caseTag">HISTORICAL</span>
+                </div>
+                <div class="case-tabs" role="group" aria-label="研究案例">
+                  <button id="appleCase" class="selected">真实材料案例</button
+                  ><button id="simCase">虚构情景</button>
+                </div>
+                <label class="field-label" for="thesis">你想验证什么？</label>
+                <div class="thesis-input">
+                  <textarea id="thesis" maxlength="1200" spellcheck="false">
+苹果 2024 财年第四季度盈利改善主要来自经营改善。</textarea
+                  ><span class="input-corner">⌘ ↵ 开始</span>
+                </div>
+                <div id="exampleButtons" class="chips">
+                  <button data-template="default">盈利改善来自经营</button
+                  ><button data-template="gaap">GAAP 盈利是否改善</button>
+                </div>
+                <div class="context-line">
+                  <span class="company-dot">A</span>
+                  <div>
+                    <strong id="companyName">苹果 AAPL</strong
+                    ><small id="periodLabel">FY2024 Q4 对比 FY2023 Q4</small>
+                  </div>
+                </div>
+                <label class="field-label" for="basis">盈利口径</label
+                ><select id="basis">
+                  <option value="both">先比较两种口径，再作判断</option>
+                  <option value="gaap">GAAP 稀释每股收益</option>
+                  <option value="adjusted">剔除一次性费用后的稀释 EPS</option>
+                </select>
+                <p class="field-help" id="basisHelp">
+                  不同口径可能给出相反方向，先不要混用。
+                </p>
+                <button class="button primary full" id="planBtn">
+                  <span>拆解并澄清命题</span><span>→</span>
+                </button>
+                <p class="keyboard-note" id="inputHint">
+                  本地案例支持预设命题；自定义命题需接入真实 AI。
+                </p>
+              </section>
+              <section class="panel source-panel">
+                <div class="panel-heading">
+                  <h2>材料库</h2>
+                  <span class="muted" id="sourceCount">2 份原始材料</span>
+                </div>
+                <div id="sourceList"></div>
+                <p class="source-foot" id="sourceFoot">
+                  同一发行人的两期公告，不等于两个独立信息源。
+                </p>
+              </section>
+            </div>
+            <div class="right-column">
+              <div class="stepper" aria-label="研究进度">
+                <div class="step active" id="step1">
+                  <span>1</span>
+                  <p>提出命题</p>
+                </div>
+                <i></i>
+                <div class="step" id="step2">
+                  <span>2</span>
+                  <p>澄清与修订</p>
+                </div>
+                <i></i>
+                <div class="step" id="step3">
+                  <span>3</span>
+                  <p>验证与追溯</p>
+                </div>
+                <i></i>
+                <div class="step" id="step4">
+                  <span>4</span>
+                  <p>继续研究</p>
+                </div>
+              </div>
+              <div class="notice hidden" id="errorBox" role="alert">
+                <div>
+                  <strong id="errorTitle">本次未完成验证</strong>
+                  <p id="errorText"></p>
+                </div>
+                <button class="button small" id="dismissError">知道了</button>
+              </div>
+              <section class="panel welcome-panel" id="welcome">
+                <div class="welcome-visual">
+                  <span class="paper-shape">01</span
+                  ><span class="paper-shape second">02</span
+                  ><span class="lens">✓</span>
+                </div>
+                <span class="eyebrow">A BETTER QUESTION COMES FIRST</span>
+                <h2>“盈利增长”，可能有两种答案。</h2>
+                <p>
+                  GAAP 每股收益下降，调整后每股收益却增长。<br />先把口径拆开，才能知道证据究竟支持什么。
+                </p>
+                <div class="preview-facts">
+                  <div>
+                    <span>GAAP EPS 同比</span
+                    ><strong class="market-down">−33.6%</strong>
+                  </div>
+                  <div>
+                    <span>调整后 EPS 同比</span
+                    ><strong class="market-up">+12%</strong>
+                  </div>
+                  <div><span>经营主因归因</span><strong>待验证</strong></div>
+                </div>
+                <p class="welcome-caption">
+                  苹果 FY2024 Q4 历史材料；第一项为程序计算，第二项为公司披露。
+                </p>
+                <button class="button soft" id="quickStart">
+                  开始体验这个案例 →
+                </button>
+              </section>
+              <section class="panel clarification hidden" id="planPanel">
+                <div class="panel-heading">
+                  <h2>
+                    <span class="number-label">02</span
+                    >先确认，我们在验证同一件事
+                  </h2>
+                  <span class="subtle-tag">HUMAN IN THE LOOP</span>
+                </div>
+                <p id="clarificationText" class="clarification-text"></p>
+                <div class="revised-block">
+                  <label class="field-label" for="revisedThesis"
+                    >澄清后的研究问题 <span>可修改</span></label
+                  ><textarea id="revisedThesis" maxlength="1600"></textarea>
+                </div>
+                <div id="questionList" class="question-list"></div>
+                <div class="confirm-footer">
+                  <span class="muted" id="questionHint"
+                    >确认口径后，再进入证据验证。</span
+                  ><button id="analyzeBtn" class="button primary">
+                    确认并验证 <span>→</span>
+                  </button>
+                </div>
+              </section>
+              <section
+                id="loadingPanel"
+                class="panel loading-panel hidden"
+                aria-live="polite"
+              >
+                <div class="loading-head">
+                  <span class="spinner"></span>
+                  <div>
+                    <h2 id="loadingTitle">正在组织证据</h2>
+                    <p id="loadingSubtitle">
+                      保留不确定性，不把缺失材料补成事实。
+                    </p>
+                  </div>
+                </div>
+                <div id="loadingSteps"></div>
+                <button class="button small ghost" id="cancelBtn">
+                  取消本次操作
+                </button>
+              </section>
+              <section id="resultSection" class="hidden">
+                <div class="result-toolbar">
+                  <span id="resultStamp" class="muted"></span>
+                  <div>
+                    <button class="button small ghost" id="revisionBtn">
+                      修改命题</button
+                    ><button class="button small" id="saveTopBtn">
+                      保存研究 ↗
+                    </button>
+                  </div>
+                </div>
+                <div id="verdictCard" class="verdict-card"></div>
+                <div id="metricGrid" class="metric-grid"></div>
+                <div class="panel evidence-panel">
+                  <div class="panel-heading">
+                    <h2>
+                      证据链
+                      <span id="evidenceCount" class="count soft-count"></span>
+                    </h2>
+                    <span class="muted">事实与推论分开展示</span>
+                  </div>
+                  <div
+                    class="evidence-tabs"
+                    id="evidenceTabs"
+                    role="group"
+                    aria-label="证据筛选"
+                  ></div>
+                  <div id="evidenceList"></div>
+                  <div class="evidence-footer" id="coverageText"></div>
+                </div>
+                <div class="two-up">
+                  <section class="panel" id="conflictPanel"></section>
+                  <section class="panel" id="comparisonPanel"></section>
+                </div>
+                <section class="panel" id="changesPanel"></section>
+                <section class="panel followup-panel">
+                  <div class="panel-heading">
+                    <h2>下一步，值得问什么？</h2>
+                    <span class="subtle-tag" id="answerMode">本地规则问答</span>
+                  </div>
+                  <div id="suggestedQuestions" class="chips"></div>
+                  <div
+                    id="chatHistory"
+                    class="chat-history"
+                    aria-live="polite"
+                  ></div>
+                  <div class="chat-composer">
+                    <input
+                      id="followupInput"
+                      maxlength="800"
+                      placeholder="继续追问口径、证据缺口或结论边界…"
+                      aria-label="追问内容"
+                    /><button
+                      id="askBtn"
+                      class="button primary"
+                      aria-label="发送追问"
+                    >
+                      ↑
+                    </button>
+                  </div>
+                </section>
+                <div class="research-actions">
+                  <p><strong>把未知保存下来，</strong>留给下一次研究。</p>
+                  <div>
+                    <button class="button" id="exportBtn">导出研究记录</button
+                    ><button class="button primary" id="saveBtn">
+                      保存为研究任务
+                    </button>
+                  </div>
+                </div>
+              </section>
+            </div>
+          </div>
+        </section>
+        <section id="labView" class="hidden">
+          <div class="page-heading">
+            <div>
+              <div class="eyebrow">COUNTERFACTUAL SANDBOX</div>
+              <h1>如果假设改变，结论会改变吗？</h1>
+              <p>不预测股价。只检验“经营是盈利增长主因”的简化逻辑。</p>
+            </div>
+          </div>
+          <div class="mode-banner synthetic">
+            <span class="banner-dot"></span>
+            <p>
+              <strong>全部为虚构数据</strong> · 示例制造 A
+              不是实际公司；本页是确定性计算，不是 AI 或金融接口返回。
+            </p>
+          </div>
+          <div class="lab-grid">
+            <section class="panel">
+              <div class="panel-heading">
+                <h2>设定比较期参数</h2>
+                <span class="subtle-tag">百万元 · 假设</span>
+              </div>
+              <div id="presetButtons" class="preset-buttons"></div>
+              <div class="simulation-table">
+                <div class="table-labels">
+                  <span>项目</span><span>基期</span><span>比较期</span>
+                </div>
+                <div id="simInputs"></div>
+              </div>
+              <label class="field-label" for="otherSlider"
+                >快速实验：调整其他收益</label
+              ><input
+                type="range"
+                id="otherSlider"
+                min="0"
+                max="16"
+                step="0.5"
+                value="8"
+              />
+              <div class="range-labels">
+                <span>0</span><span>其他收益 <b id="otherValue">8</b></span
+                ><span>16</span>
+              </div>
+              <p class="field-help">
+                仅改这一项，其余参数保持不变。现金流留空时，明确显示无法验证。
+              </p>
+              <button class="button primary full" id="useScenario">
+                用这组假设验证命题 →
+              </button>
+            </section>
+            <div>
+              <section class="panel" id="labSummary"></section>
+              <section class="panel" id="contributionPanel"></section>
+              <section class="panel">
+                <h2>结论翻转条件</h2>
+                <p id="thresholdText"></p>
+                <details>
+                  <summary>这个模型做了哪些简化？</summary>
+                  <p>
+                    经营利润 = 收入 − 营业成本 − 期间费用。净利润 = 经营利润 +
+                    其他收益 −
+                    税费。人为定义“主要”为：净利润增长且经营利润增量为正，并占净利润增量的
+                    50% 以上。带符号贡献率可以超过
+                    100%，不是概率、不是置信度。真实会计需要更完整的分项与调节。
+                  </p>
+                </details>
+              </section>
+            </div>
+          </div>
+        </section>
+        <section id="tasksView" class="hidden">
+          <div class="page-heading">
+            <div>
+              <div class="eyebrow">RESEARCH MEMORY</div>
+              <h1>让研究有下一步。</h1>
+              <p>
+                任务仅保存在当前浏览器，可重新打开、标记状态或比较两个版本。
+              </p>
+            </div>
+            <button class="button" id="compareBtn">比较选中的两项</button>
+          </div>
+          <div id="taskList"></div>
+        </section>
+        <footer>
+          <span>证据台 · 研究辅助，不构成投资建议</span
+          ><span>不提供买卖指令、收益承诺或实时行情</span>
+        </footer>
+      </main>
+    </div>
+    <dialog id="settingsDialog" class="settings-dialog">
+      <div class="dialog-heading">
+        <div>
+          <span class="eyebrow">CONNECTION & RELIABILITY</span>
+          <h2>接入与测试设置</h2>
+        </div>
+        <button
+          class="icon-btn"
+          data-close="settingsDialog"
+          aria-label="关闭设置"
+        >
+          ×
+        </button>
+      </div>
+      <p class="muted">
+        默认无需账号即可体验。真实 AI
+        需要部署服务端并配置模型密钥，密钥不要填入此页面。
+      </p>
+      <label class="field-label" for="runMode">分析方式</label
+      ><select id="runMode">
+        <option value="local">本地案例 / 模拟规则（不调用模型）</option>
+        <option value="live">真实 AI（需配置服务端）</option></select
+      ><label class="field-label" for="sourcePolicy">真实 AI 使用的材料</label
+      ><select id="sourcePolicy">
+        <option value="snapshot">已核验官方材料摘录（无需现场抓取）</option>
+        <option value="online">在线复核官方网页（失败则停止）</option></select
+      ><label class="field-label" for="accessCode">应用访问码</label
+      ><input
+        type="password"
+        id="accessCode"
+        autocomplete="off"
+        placeholder="APP_ACCESS_CODE，不是模型 API Key"
+      />
+      <p class="field-help">
+        访问码只留在当前页面内存，不写入保存任务或导出文件。
+      </p>
+      <div class="settings-divider"></div>
+      <label class="field-label" for="faultMode"
+        >异常演练 <span>仅模拟错误，不验证真实接口</span></label
+      ><select id="faultMode">
+        <option value="none">关闭异常演练</option>
+        <option value="source">模拟：原始材料超时</option>
+        <option value="auth">模拟：模型鉴权失败</option>
+        <option value="quote">模拟：生成引文校验失败</option>
+      </select>
+      <div class="dialog-actions">
+        <button class="button" id="testConnectionBtn">检测部署配置</button
+        ><button class="button primary" id="applySettings">应用设置</button>
+      </div>
+      <p id="connectionResult" class="field-help" role="status"></p>
+    </dialog>
+    <dialog id="sourceDialog" class="source-dialog">
+      <div class="dialog-heading">
+        <div>
+          <span class="eyebrow">PRIMARY SOURCE</span>
+          <h2 id="sourceTitle">原始材料</h2>
+        </div>
+        <button
+          class="icon-btn"
+          data-close="sourceDialog"
+          aria-label="关闭原始材料"
+        >
+          ×
+        </button>
+      </div>
+      <div id="sourceDetail"></div>
+    </dialog>
+    <dialog id="compareDialog" class="compare-dialog">
+      <div class="dialog-heading">
+        <div>
+          <span class="eyebrow">VERSION COMPARISON</span>
+          <h2>两个版本，哪里变了？</h2>
+        </div>
+        <button
+          class="icon-btn"
+          data-close="compareDialog"
+          aria-label="关闭比较"
+        >
+          ×
+        </button>
+      </div>
+      <div id="compareContent"></div>
+    </dialog>
+    <dialog id="guideDialog">
+      <div class="dialog-heading">
+        <h2>两分钟走完一条研究链</h2>
+        <button
+          class="icon-btn"
+          data-close="guideDialog"
+          aria-label="关闭操作提示"
+        >
+          ×
+        </button>
+      </div>
+      <ol class="guide-list">
+        <li>
+          <strong>提出命题</strong>
+          <p>选历史材料案例，或去情景实验调一组假设。</p>
+        </li>
+        <li>
+          <strong>澄清口径</strong>
+          <p>区分 GAAP 与调整后 EPS，确认子问题。真实 AI 模式支持自由修订。</p>
+        </li>
+        <li>
+          <strong>检查证据</strong>
+          <p>切换支持、反对与未知；点击来源查看摘录及官方原文。</p>
+        </li>
+        <li>
+          <strong>继续研究</strong>
+          <p>追问、保存或导出；在研究任务中比较两个版本。</p>
+        </li>
+      </ol>
+      <div class="notice">
+        案例规则、虚构模拟与真实 AI
+        三者独立标识。公开材料不是模拟数据；没有接通模型时，不会显示“AI
+        已分析”。
+      </div>
+    </dialog>
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    <script src="data.js"></script>
+    <script src="engine.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>
